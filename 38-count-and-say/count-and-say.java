@@ -1,28 +1,24 @@
 class Solution {
-    public String countAndSay(int n) {
-        String result = "1";   // Base case: level 1
+    public static String countAndSay(int n) {
+        String base = "1";
 
-        for (int i = 1; i < n; i++) {
-            StringBuilder current = new StringBuilder();
+        for(int i=1;i<n;i++){
             int count = 1;
-
-            for (int j = 1; j < result.length(); j++) {
-                if (result.charAt(j) == result.charAt(j - 1)) {
+            StringBuilder str = new StringBuilder();
+            for(int j = 1 ; j<base.length();j++ ){
+                if(base.charAt(j) == base.charAt(j-1)){
                     count++;
-                } else {
-                    current.append(count)
-                           .append(result.charAt(j - 1));
+                } else{
+                    str.append(count);
+                    str.append(base.charAt(j-1));
                     count = 1;
+
                 }
             }
-
-            // Append the last group
-            current.append(count)
-                   .append(result.charAt(result.length() - 1));
-
-            result = current.toString();
+            str.append(count);
+            str.append(base.charAt(base.length()-1));
+            base = str.toString();
         }
-
-        return result;
+        return base;
     }
 }
