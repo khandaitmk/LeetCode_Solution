@@ -20,19 +20,13 @@ class Solution {
         }
         int h1 = minDepth(root.left);
         int h2 = minDepth(root.right);
-        int h = 0;
-        if(h1 == 0 && h2 == 0){
-            h = 1;
-        }
         if(h1 == 0){
-             h = h2 + 1;
+             return h2 + 1;
         }
         if(h2 == 0) {
-             h = h1 + 1;
+             return h1 + 1;
         }
-        if(h1 != 0 && h2 != 0){
-            h = Math.min(h1 ,h2)+1;
-        }
-        return h;
+        
+        return Math.min(h1 ,h2)+1;
     }
 }
