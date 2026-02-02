@@ -22,10 +22,10 @@ class Solution {
         if(p.val < root.val && q.val < root.val){
             return lowestCommonAncestor(root.left , p ,q);
         }
-        TreeNode n1 = lowestCommonAncestor(root.left , p ,q);
-        TreeNode n2 = lowestCommonAncestor(root.right , p ,q);
-        if(n1 == null) return n2;
-        if(n2 == null) return n1;
+        // TreeNode n1 = lowestCommonAncestor(root.left , p ,q);
+        // TreeNode n2 = lowestCommonAncestor(root.right , p ,q);
+        // if(n1 == null) return n2;
+        // if(n2 == null) return n1;
         return root;
     }
 }
