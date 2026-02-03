@@ -17,16 +17,16 @@ class Solution {
     public TreeNode balanceBST(TreeNode root) {
         ArrayList<TreeNode> a = new ArrayList<>();
         inorderForBalance(root,a);
-        return balanceBST(a,0,a.size()-1);
+        return helper(a,0,a.size()-1);
     }
-    static TreeNode balanceBST(ArrayList<TreeNode> a,int start ,int end){
+    static TreeNode helper(ArrayList<TreeNode> a,int start ,int end){
         if(start > end){
             return null;
         }
         int mid = start +(end-start)/2;
         TreeNode root = a.get(mid);
-        root.left = balanceBST(a, start , mid-1);
-        root.right = balanceBST(a, mid+1 , end);
+        root.left = helper(a, start , mid-1);
+        root.right = helper(a, mid+1 , end);
         return root;
     }
     static void inorderForBalance(TreeNode root,ArrayList<TreeNode> a){
