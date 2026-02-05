@@ -1,18 +1,21 @@
 class Solution {
     public static int[] constructTransformedArray(int[] nums) {
         int n = nums.length;
-        int[] result = new int[n];
-
-        for (int i = 0; i < n; i++) {
-            if (nums[i] == 0) {
-                result[i] = 0;
-            } else {
-                int newIndex = (i + nums[i] % n + n) % n;
-                result[i] = nums[newIndex];
+        int [] arr = new int[n];
+        for(int i=0 ; i<n ; i++){
+            int temp = nums[i];
+            if(temp == 0){
+                arr[i] = nums[i];
+            } else if (temp > 0) {
+                int index = (i + temp) % n;
+                arr[i] = nums[index];
+            }else {
+                int index = (n - (Math.abs(temp) % n) +i) % n;
+                arr[i] = nums[index];
             }
-        }
 
-        return result;
+        }
+        return arr;
     }
 
 }
