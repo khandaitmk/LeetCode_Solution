@@ -15,9 +15,9 @@ class Solution {
      
     }
      public static Node helper(Node head) {
-        if(head == null ){
-            return null;
-        }
+        // if(head == null ){
+        //     return null;
+        // }
         Node curr = head;
         Node last = head;
 
