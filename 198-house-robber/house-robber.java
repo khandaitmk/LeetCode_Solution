@@ -11,15 +11,9 @@ class Solution {
     public static int helper(int[] nums ,int sum , int n, int[] dp){
         if(n<=0) return 0;
         if(dp[n] != -1) return dp[n];
-        if(n-2 >= 0){
-            int include = nums[n-1] + sum + helper(nums , sum , n-2 , dp);
-            int exclude = sum + helper(nums , sum , n-1, dp);
-            dp[n] =  Math.max(include , exclude);
-            return dp[n];
-        }else if (n-1 >= 0){
-             dp[n] = nums[n-1] + sum + helper(nums , sum , n-1 , dp);
-            return dp[n];
-        }
-        return sum;
+        int include = nums[n-1] + sum + helper(nums , sum , n-2 , dp);
+        int exclude = sum + helper(nums , sum , n-1, dp);
+        dp[n] =  Math.max(include , exclude);
+        return dp[n];
     }
 }
