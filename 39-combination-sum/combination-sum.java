@@ -10,7 +10,7 @@ class Solution {
             res.add(new ArrayList<>(temp));
             return;
         }
-        if(tempSum > target || start == n){
+        if(start == n){
             return;
         }
         if(candidates[start] <= target - tempSum){
