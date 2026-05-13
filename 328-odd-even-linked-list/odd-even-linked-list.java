@@ -42,25 +42,28 @@ class Solution {
         ListNode temp = head;
         int i = 1;
         while(temp != null){
+             ListNode nextNode = temp.next;
+
+            temp.next = null; 
             if(i % 2 == 0){
                 if(even == null){
-                    even  = new ListNode(temp.val);
+                    even  = temp;
                     temp_even = even;
                 }else{
-                    even.next = new ListNode(temp.val);
+                    even.next = temp;
                     even  = even.next;
                 }
             }else{
                 if(odd == null){
-                    odd = new ListNode(temp.val);
+                    odd = temp;
                     res = odd;
                 }else{
-                    odd.next = new ListNode(temp.val);
+                    odd.next = temp;
                     odd = odd.next;
                 }
             }
             i++;
-            temp = temp.next;
+            temp = nextNode;
         }
         odd.next = temp_even;
         return res;
