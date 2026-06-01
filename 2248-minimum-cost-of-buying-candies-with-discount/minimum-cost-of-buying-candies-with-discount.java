@@ -1,6 +1,5 @@
 class Solution {
     public int minimumCost(int[] cost) {
-        Arrays.sort(cost);
         int sum = 0;
         int n = cost.length;
         PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
