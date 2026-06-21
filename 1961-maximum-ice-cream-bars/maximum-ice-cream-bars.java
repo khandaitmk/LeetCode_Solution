@@ -6,8 +6,6 @@ class Solution {
             if(num <= coins){
                 count++;
                 coins -= num;
-            }else{
-                break;
             }
         }
         return count;
