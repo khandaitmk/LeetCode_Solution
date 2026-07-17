@@ -1,15 +1,12 @@
 class Solution {
-    static class Pair implements Comparable<Pair>{
-        int n;
-        int path;
-        int stops =0;
-        public Pair(int n , int path , int stop){
-            this.n = n;
-            this.path = path;
-            this.stops = stop;
-        }
-        public int compareTo(Pair p){
-            return this.path - p.path;
+    static class Info{
+        int v ;
+        int stops;
+        int cost;
+        public Info(int v , int cost , int stops){
+            this.v = v;
+            this.stops = stops ;
+            this.cost = cost;
         }
     }
     static class Edge{
@@ -36,41 +33,33 @@ class Solution {
         return helper(graph , src , dst , k);
     }
     public static int helper(ArrayList<Edge>[] graph  , int src , int dst , int k){
-        int[][] dist = new int[graph.length][k + 2];
-        for (int i = 0; i < graph.length; i++) {
-            Arrays.fill(dist[i], Integer.MAX_VALUE);
+        int n = graph.length;
+        int[] dist = new int[n];
+        for(int i=0;i<n;i++){
+            if(i != src){
+                dist[i] = Integer.MAX_VALUE;
+            }
         }
-        dist[src][0] = 0;
+        Queue<Info> q = new LinkedList<>();
+        q.add(new Info(src , 0 , 0));
 
-        PriorityQueue<Pair> pq = new PriorityQueue<>();
-        pq.add(new Pair(src , 0 , 0));
-        while(!pq.isEmpty()){
-            Pair curr = pq.remove();
-            if(curr.stops == k + 1){
+        while(!q.isEmpty()){
+            Info curr = q.remove();
+            if(curr.stops > k){
                 continue;
             }
-            for(int i=0;i<graph[curr.n].size();i++){
-                    Edge e = graph[curr.n].get(i);
-                    int u = e.src;
-                    int v = e.dest;
-                    int w = e.wt;
-                    if(curr.stops + 1 <= k + 1 &&
-                            curr.path + w < dist[v][curr.stops + 1]){
+            for(int i=0;i<graph[curr.v].size();i++){
+                Edge e =  graph[curr.v].get(i);
+                int u = e.src;
+                int v = e.dest;
+                int wt = e.wt;
 
-                        dist[v][curr.stops + 1] = curr.path + w;
-
-                        pq.add(new Pair(v,
-                                dist[v][curr.stops + 1],
-                                curr.stops + 1));
-                    }
+                if(dist[u] != Integer.MAX_VALUE  && curr.cost + wt < dist[v] && curr.stops <= k){
+                    dist[v] = curr.cost + wt;
+                    q.add(new Info(v , dist[v] , curr.stops+1));
+                }
             }
         }
-        int ans = Integer.MAX_VALUE;
-
-        for(int i = 0; i <= k + 1; i++){
-            ans = Math.min(ans, dist[dst][i]);
-        }
-
-        return ans == Integer.MAX_VALUE ? -1 : ans;
+        return dist[dst] == Integer.MAX_VALUE ? -1 : dist[dst];
     }
 }
